@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <TodoItem
-        v-for="(todo, index) in todos"
+        v-for="(todo, index) in filterCompleted"
         :key="index"
         :todo="todo"
         @delete-todo="deleteTodo"
@@ -23,7 +23,8 @@
 <script setup>
 import TodoItem from './TodoItem.vue'
 const props = defineProps({
-  todos: Array
+  todos: Array,
+  filterCompleted: Array
 })
 props //this line is only used to prevent error message, you can ignore it
 const emit = defineEmits(['delete-todo'])

@@ -1,19 +1,19 @@
 {
   "todos": [
     {
-      "text": "Learn React",
-      "completed": true,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "text": "Learn Redux",
-      "completed": true
-    },
-    {
-      "text": "Lorem ipsum dolor sit amet",
-      "completed": true,
+      "text": "Work",
+      "completed": false,
       "id": 3
+    },
+    {
+      "text": "Work even more",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "text": "Skripsi cuy",
+      "completed": false,
+      "id": 5
     }
   ]
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUpdated } from 'vue'
 const props = defineProps({
   todo: Object
 })
@@ -38,6 +38,14 @@ const toggleCompleted = () => {
 }
 
 onMounted(() => {
+  if (props.todo.completed) {
+    statusDisplayClass.value = 'status-display-completed'
+  } else {
+    statusDisplayClass.value = 'status-display-pending'
+  }
+})
+
+onUpdated(() => {
   if (props.todo.completed) {
     statusDisplayClass.value = 'status-display-completed'
   } else {
