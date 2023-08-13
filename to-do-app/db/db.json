@@ -1,18 +1,18 @@
 {
   "todos": [
     {
-      "id": 1,
       "text": "Learn React",
-      "completed": false
+      "completed": true,
+      "id": 1
     },
     {
       "id": 2,
       "text": "Learn Redux",
-      "completed": false
+      "completed": true
     },
     {
       "text": "Lorem ipsum dolor sit amet",
-      "completed": false,
+      "completed": true,
       "id": 3
     }
   ]

@@ -2,7 +2,7 @@
 <template>
   <tr class="item-list">
     <td class="todo-name">
-      <span @click="toggleCompleted" class="todo-text">{{ todo.text }}</span>
+      <span class="todo-text">{{ todo.text }}</span>
     </td>
     <td @click="toggleCompleted">
       <button v-if="todo.completed" :class="statusDisplayClass">Completed</button>
@@ -15,26 +15,35 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 const props = defineProps({
   todo: Object
 })
 const statusDisplayClass = ref('status-display-pending')
 
+const emit = defineEmits(['delete-todo'])
+const deleteTodo = () => {
+  emit('delete-todo', props.todo.id)
+}
 const toggleCompleted = () => {
   // eslint-disable-next-line vue/no-mutating-props
   props.todo.completed = !props.todo.completed
   if (props.todo.completed) {
     statusDisplayClass.value = 'status-display-completed'
+    emit('update-status-complete', props.todo.id)
   } else {
     statusDisplayClass.value = 'status-display-pending'
+    emit('update-status-pending', props.todo.id)
   }
 }
 
-const emit = defineEmits(['delete-todo'])
-const deleteTodo = () => {
-  emit('delete-todo', props.todo.id)
-}
+onMounted(() => {
+  if (props.todo.completed) {
+    statusDisplayClass.value = 'status-display-completed'
+  } else {
+    statusDisplayClass.value = 'status-display-pending'
+  }
+})
 </script>
 
 <style scoped>

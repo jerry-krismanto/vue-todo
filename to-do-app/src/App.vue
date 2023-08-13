@@ -1,3 +1,6 @@
+<!-- TODO:
+ 1. add update method to update task status when clicked -->
+
 <script setup>
 import TodoList from './components/TodoList.vue'
 import { ref, onMounted } from 'vue'
@@ -39,7 +42,7 @@ const deleteTodos = async (id) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ text: newTodo.value, completed: false })
-    })  
+    })
     if (response.ok) {
       todos.value = todos.value.filter((todo) => todo.id !== id)
     } else {
@@ -47,6 +50,48 @@ const deleteTodos = async (id) => {
     }
   } catch (err) {
     console.log('error deleting data, ', err)
+  }
+}
+
+const updateTodosStatusComplete = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:3000/todos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ completed: true })
+    })
+    const data = await response.json()
+    console.log(data)
+    if (response.ok) {
+      console.log('todo updated')
+    } else {
+      console.log('error updating todo')
+    }
+  } catch (err) {
+    console.log('error updating todo', err)
+  }
+}
+
+const updateTodosStatusPending = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:3000/todos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ completed: false })
+    })
+    const data = await response.json()
+    console.log(data)
+    if (response.ok) {
+      console.log('todo updated')
+    } else {
+      console.log('error updating todo')
+    }
+  } catch (err) {
+    console.log('error updating todo', err)
   }
 }
 
@@ -64,7 +109,12 @@ onMounted(() => {
       @keyup.enter="postTodos"
       placeholder="Add a new Todo"
     />
-    <TodoList :todos="todos" @delete-todo="deleteTodos" />
+    <TodoList
+      :todos="todos"
+      @delete-todo="deleteTodos"
+      @update-status-complete="updateTodosStatusComplete"
+      @update-status-pending="updateTodosStatusPending"
+    />
   </div>
 </template>
 

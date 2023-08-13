@@ -13,6 +13,8 @@
         :key="index"
         :todo="todo"
         @delete-todo="deleteTodo"
+        @update-status-complete="updateTodoStatusComplete"
+        @update-status-pending="updateTodoStatusPending"
       />
     </tbody>
   </table>
@@ -27,6 +29,12 @@ props //this line is only used to prevent error message, you can ignore it
 const emit = defineEmits(['delete-todo'])
 const deleteTodo = (id) => {
   emit('delete-todo', id)
+}
+const updateTodoStatusComplete = (id) => {
+  emit('update-status-complete', id)
+}
+const updateTodoStatusPending = (id) => {
+  emit('update-status-pending', id)
 }
 </script>
 
