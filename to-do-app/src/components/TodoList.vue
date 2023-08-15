@@ -27,7 +27,7 @@ const props = defineProps({
   filterCompleted: Array
 })
 props //this line is only used to prevent error message, you can ignore it
-const emit = defineEmits(['delete-todo'])
+const emit = defineEmits(['delete-todo', 'update-status-complete', 'update-status-pending'])
 const deleteTodo = (id) => {
   emit('delete-todo', id)
 }

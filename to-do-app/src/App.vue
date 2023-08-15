@@ -1,6 +1,6 @@
 <!-- TODO:
 1. add update method to update task status when clicked (DONE!!!)
-2. add a filter to show only completed tasks -->
+2. add a filter to show only completed tasks (DONE!!!)-->
 
 <script setup>
 import TodoList from './components/TodoList.vue'
@@ -85,8 +85,6 @@ const updateTodosStatusPending = async (id) => {
       },
       body: JSON.stringify({ completed: false })
     })
-    const data = await response.json()
-    console.log(data)
     if (response.ok) {
       console.log('todo updated')
     } else {
@@ -104,7 +102,6 @@ const filterCompleted = computed(() => {
 onMounted(() => {
   fetchTodos()
 })
-
 </script>
 
 <template>
@@ -117,7 +114,7 @@ onMounted(() => {
       placeholder="Add a new Todo"
     />
     <div>
-      <button @click="hideCompleted = !hideCompleted">
+      <button class="filter-btn" @click="hideCompleted = !hideCompleted">
         {{ hideCompleted ? 'Show all' : 'Hide completed' }}
       </button>
     </div>
@@ -152,6 +149,16 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 1rem;
+}
+
+.filter-btn {
+  padding: 0.5rem;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: black;
+  border: black solid 3px;
+  width: 140px;
 }
 
 @media screen and (max-width: 500px) {

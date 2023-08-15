@@ -21,7 +21,7 @@ const props = defineProps({
 })
 const statusDisplayClass = ref('status-display-pending')
 
-const emit = defineEmits(['delete-todo'])
+const emit = defineEmits(['delete-todo','update-status-complete','update-status-pending'])
 const deleteTodo = () => {
   emit('delete-todo', props.todo.id)
 }
